@@ -1,0 +1,7 @@
+pthread_create calls an initialize function the first time it is called. It chooses the new thread id, creates a new stack, sets up the buffer and jump buf and and calls set jmp.
+
+pthread_exit clears the memory of the stack (if it isn't the main thread), sets the thread as inactive, and changes threads.
+
+signal_handler calls setjmp and changes threads
+
+pthread_self returns the current thread id.

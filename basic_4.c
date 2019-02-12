@@ -25,8 +25,9 @@ unsigned int make_mess = 0;
 unsigned int is_welcome = 1;
 pthread_t thread_1;
 
-void * bbq_party(void *args) {
-	printf("Friend %u came to the party!\n",pthread_self());
+void * bbq_party(void* arg) {
+	int * arr = (int*) arg;
+	printf("Friend %u came to the party! a = %d\n",pthread_self(), arr[0]);
 	while(is_welcome > 0) {
 		make_mess++;
 		pass_time;
@@ -38,7 +39,9 @@ int main() {
 	
 	printf("Inviting friends to the party!\n");
 
-	pthread_create(&thread_1, NULL, bbq_party, NULL);
+	int* i = new int[1];
+	i [0] = 5;
+	pthread_create(&thread_1, NULL, bbq_party, (void*) i);
 
 	while(thread_1_done == 0) {
 		if(is_welcome > 0 && make_mess >= 2) {
